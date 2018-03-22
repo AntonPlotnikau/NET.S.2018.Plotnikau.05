@@ -1,0 +1,6 @@
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extensions\bin\Debug\Extensions.dll
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extensions\bin\Debug\Extensions.pdb
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extensions\obj\Debug\Extensions.csprojResolveAssemblyReference.cache
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extensions\obj\Debug\Extensions.csproj.CoreCompileInputs.cache
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extensions\obj\Debug\Extensions.dll
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extensions\obj\Debug\Extensions.pdb

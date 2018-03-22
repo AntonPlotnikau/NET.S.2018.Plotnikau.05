@@ -1,0 +1,16 @@
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\bin\Debug\NUnit3.TestAdapter.dll
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\bin\Debug\NUnit3.TestAdapter.pdb
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\bin\Debug\nunit.engine.dll
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\bin\Debug\nunit.engine.api.dll
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\bin\Debug\Mono.Cecil.dll
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\bin\Debug\Extension.Tests.dll
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\bin\Debug\Extension.Tests.pdb
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\bin\Debug\Extensions.dll
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\bin\Debug\nunit.framework.dll
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\bin\Debug\Extensions.pdb
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\bin\Debug\nunit.framework.pdb
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\bin\Debug\nunit.framework.xml
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\obj\Debug\Extension.Tests.csprojResolveAssemblyReference.cache
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\obj\Debug\Extension.Tests.csproj.CoreCompileInputs.cache
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\obj\Debug\Extension.Tests.dll
+E:\training\NET.S.2018.Plotnikau.05\NET.S.2018.Plotnikau.05\Extension.Tests\obj\Debug\Extension.Tests.pdb
