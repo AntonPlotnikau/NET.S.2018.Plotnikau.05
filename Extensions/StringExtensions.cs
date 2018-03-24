@@ -10,75 +10,108 @@ namespace Extensions
         /// <summary>
         /// To the decimal form.
         /// </summary>
-        /// <param name="source">The source string.</param>
-        /// <param name="systemIndex">Index of the numerical system.</param>
+        /// <param name="source">The source.</param>
+        /// <param name="notation">Notation object.</param>
         /// <returns>decimal form of number</returns>
-        /// <exception cref="ArgumentOutOfRangeException">systemIndex less than two or more than 16</exception>
-        /// <exception cref="ArgumentNullException">source string is null</exception>
-        /// <exception cref="ArgumentException">source string is not fit to current systemIndex</exception>
-        /// <exception cref="OverflowException">result is more than max value of unsigned integer</exception>
-        public static long ToDecimalForm(this string source, int systemIndex)
+        /// <exception cref="ArgumentNullException">source is null</exception>
+        public static int ToDecimalForm(this string source, Notation notation)
         {
-            if (systemIndex < 2 || systemIndex > 16)
-            {
-                throw new ArgumentOutOfRangeException(nameof(systemIndex));
-            }
+            int index = notation.NotationBase;
 
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            long result = 0;
+            int result = 0;
             char[] array = source.ToCharArray();
 
             for (int i = array.Length - 1; i >= 0; i--) 
             {
-                int temp = array[i] - '0';
-                if (array[i] == 'A' || array[i] == 'a')
+                int temp = notation.DigitToDecimal(array[i]);
+
+                checked
                 {
-                    temp = 10;
+                    result += temp * (int)Math.Pow(index, array.Length - i - 1);
                 }
-
-                if (array[i] == 'B' || array[i] == 'b')
-                {
-                    temp = 11;
-                }
-
-                if (array[i] == 'C' || array[i] == 'c')
-                {
-                    temp = 12;
-                }
-
-                if (array[i] == 'D' || array[i] == 'd')
-                {
-                    temp = 13;
-                }
-
-                if (array[i] == 'E' || array[i] == 'e')
-                {
-                    temp = 14;
-                }
-
-                if (array[i] == 'F' || array[i] == 'f')
-                {
-                    temp = 15;
-                }
-
-                if (temp >= systemIndex)
-                {
-                    throw new ArgumentException(nameof(source));
-                }
-
-                result += temp * (long)Math.Pow(systemIndex, array.Length - i - 1);
-            }
-
-            if (result > uint.MaxValue)
-            {
-                throw new OverflowException(nameof(result));
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Notation system class
+        /// </summary>
+        public class Notation
+        {
+            /// <summary>
+            /// The default base of notation
+            /// </summary>
+            private const int DefaultBase = 2;
+
+            /// <summary>
+            /// The left border of Notation Base
+            /// </summary>
+            private const int LeftBorder = 2;
+
+            /// <summary>
+            /// The right border of Notation Base
+            /// </summary>
+            private const int RightBorder = 16;
+
+            /// <summary>
+            /// The alphabet of Notation digits
+            /// </summary>
+            private const string Alphabet = "0123456789ABCDEF";
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="Notation"/> class.
+            /// </summary>
+            public Notation()
+            {
+                this.NotationBase = DefaultBase;
+            }
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="Notation"/> class.
+            /// </summary>
+            /// <param name="sourceBase">The source base.</param>
+            /// <exception cref="ArgumentOutOfRangeException">sourceBase is out of range of the notation borders</exception>
+            public Notation(int sourceBase)
+            {
+                if (sourceBase < LeftBorder || sourceBase > RightBorder)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(sourceBase));
+                }
+
+                this.NotationBase = sourceBase;
+            }
+
+            /// <summary>
+            /// Gets the notation base.
+            /// </summary>
+            /// <value>
+            /// The notation base.
+            /// </value>
+            public int NotationBase { get; }
+
+            /// <summary>
+            /// Digits to decimal.
+            /// </summary>
+            /// <param name="digit">The digit.</param>
+            /// <returns>digit in the decimal representation</returns>
+            /// <exception cref="ArgumentException">Current notation is not contain this digit</exception>
+            public int DigitToDecimal(char digit)
+            {
+                int result = Alphabet.IndexOf(char.ToUpper(digit));
+
+                if (result >= this.NotationBase)
+                {
+                    throw new ArgumentException(nameof(digit));
+                }
+
+                return result;
+            }
         }
     }
 }

@@ -1,109 +1,95 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Runtime.InteropServices;
 
 namespace Extensions
 {
+    /// <summary>
+    /// Double extensions
+    /// </summary>
     public static class DoubleExtensions
     {
-        public static string ToBinaryForm(this double source)
+        /// <summary>
+        /// The bits in byte
+        /// </summary>
+        private const int BITS_IN_BYTE = 8;
+
+        /// <summary>
+        /// The bits in double
+        /// </summary>
+        private const int BITS_IN_DOUBLE = 8 * BITS_IN_BYTE;
+
+        /// <summary>
+        /// Double to binary string.
+        /// </summary>
+        /// <param name="number">Source double number.</param>
+        /// <returns>string that represents double bits</returns>
+        public static string DoubleToBinaryString(this double number)
         {
-            long[] array = new long[64];
-            if (source < 0)
+            DoubleToLongStruct bytes = new DoubleToLongStruct();
+            bytes.Double64bits = number;
+            string binaryString = string.Empty;
+            long bits = bytes.Long64bits;
+            for (int n = 0; n < BITS_IN_DOUBLE; n++) 
             {
-                array[0] = 1;
-                source *= -1;
-            }
-
-            long integerPart = (long)source;
-            double fractionalPart = source - integerPart;
-
-            long[] integerArray = ToBinaryArray(integerPart);
-            long[] fractionalArray = ToBinaryArray(fractionalPart);
-
-            var list = new List<long>();
-            list.AddRange(integerArray);
-            list.AddRange(fractionalArray);
-
-            for (int i = 0; i < list.Capacity && list[i] != 1; i++)
-            {
-                list.Remove(0);
-            }
-
-            if (list.Capacity > 0)
-            {
-                list.Remove(1);
-            }
-
-            for (int i = 12, j = 0; i < list.Capacity && i < 63; i++, j++) 
-            {
-                array[i] = list[j];
-            }
-
-            int E = 0;
-
-            if (integerArray.Length == 1 && integerArray[0] == 0)
-            {
-                for (int i = 0; i < 51 || fractionalArray[i] != 1; i++) 
+                if ((bits & 1) == 1) 
                 {
-                    E--;
-                }
-
-                E--;
-            }
-            else
-            {
-                E = integerArray.Length - 1;
-            }
-
-            long[] arrayE = ToBinaryArray(1023 + E);
-
-            for(int i = 0; i < arrayE.Length; i++)
-            {
-                array[i+1] = arrayE[i];
-            }
-
-            string result = "";
-            for(int i = 0; i < array.Length; i++)
-            {
-                if(array[i]==1)
-                {
-                    result += "1";
+                    binaryString = "1" + binaryString;
                 }
                 else
                 {
-                    result += "0";
+                    binaryString = "0" + binaryString;
+                }
+
+                bits >>= 1;
+            }
+
+            return binaryString;
+        }
+
+        /// <summary>
+        /// double to long bits cast
+        /// </summary>
+        [StructLayout(LayoutKind.Explicit)]
+        public struct DoubleToLongStruct
+        {
+            /// <summary>
+            /// The long64bits
+            /// </summary>
+            [FieldOffset(0)]
+            private readonly long long64bits;
+
+            /// <summary>
+            /// The double64bits
+            /// </summary>
+            [FieldOffset(0)]
+            private double double64bits;
+
+            /// <summary>
+            /// Gets the long64bits.
+            /// </summary>
+            /// <value>
+            /// The long64bits.
+            /// </value>
+            public long Long64bits
+            {
+                get
+                {
+                    return this.long64bits;
                 }
             }
 
-            return result;
-        }
-
-        private static long[] ToBinaryArray(long source)
-        {
-            var list = new List<long>();
-            do
+            /// <summary>
+            /// Sets the double64bits.
+            /// </summary>
+            /// <value>
+            /// The double64bits.
+            /// </value>
+            public double Double64bits
             {
-                list.Add(source % 2);
-                source /= 2;
+                set
+                {
+                    this.double64bits = value;
+                }
             }
-            while (source != 0);
-
-            list.Reverse();
-
-            return list.ToArray();
-        }
-
-        private static long[] ToBinaryArray(double source)
-        {
-            long[] array = new long[52];
-            for(int i = 0; i < 52; i++)
-            {
-                source *= 2 - (int)source;
-                array[i] = (int)(source);
-                source -= (int)source;
-            }
-
-            return array;
         }
     }
 }
